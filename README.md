@@ -1,27 +1,127 @@
-# MiniZuba
+# Order Packaging System
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.10.
+This system implements features to efficiently package orders displayed in a list view. It ensures smooth usability, even in slow network conditions, and provides a rich and responsive user interface. Below are the key features implemented:
 
-## Development server
+## Features Implemented:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Order List View:**
 
-## Code scaffolding
+  1. Displays orders based on package type ID
+  2. Orders are sorted in ascending order of OrderLineID.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Grouping & Filtering:**
 
-## Build
+  3. Provides options for independently filtering OrderLineId, OrderId, Quantity StockItemID, UnitPrice & Description at once.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Responsive UI:**
 
-## Running unit tests
+  4. Ensures a rich and responsive user interface on various screen resolutions for enhanced user experience.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **Fast Loading:**
 
-## Running end-to-end tests
+  5. Prioritizes fast loading of list items for user convenience.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+<!-- 5. **Unit Test Cases:**
 
-## Further help
+   - Includes comprehensive unit test cases to ensure functionality.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+6. **Package Type Color Coding:**
+   - Each package type is color-coded for easy identification. -->
+
+## How to Use:
+
+1. Clone the repository to your local machine.
+2. Install dependencies using `npm install` or `yarn install`.
+3. Run the application using `npm start` or `yarn start`.
+4. Access the application through the provided URL.
+
+## Folder Structure:
+
+User
+write the readme file code for this
+Implement as many items as possible from the list:
+Packaging orders displayed in a list view
+When no filters are applied all orderlines should be displayed.
+“OrderLineID” as the first column(extreme left)
+Items are always sorted in ascending order of “OrderLineID”
+Ensure fast loading of list items for user convenience
+Ability to filter by “Quantity”
+
+Ensure usability remains smooth even in slow network conditions
+Grouping by “OrderID”
+Grouping by “UserID”
+Rich and responsive UI
+Unit test cases
+Color code each package type.
+ChatGPT
+markdown
+Copy code
+
+# Order Packaging System
+
+This system implements features to efficiently package orders displayed in a list view. It ensures smooth usability, even in slow network conditions, and provides a rich and responsive user interface. Below are the key features implemented:
+
+## Features Implemented:
+
+1. **Order List View:**
+
+   - Displays orders with order lines.
+   - Orders are sorted in ascending order of OrderLineID.
+   - Provides filtering options for Quantity.
+
+2. **Fast Loading:**
+
+   - Prioritizes fast loading of list items for user convenience.
+
+3. **Grouping:**
+
+   - Supports grouping by OrderID and UserID for better organization.
+
+4. **Rich UI:**
+
+   - Ensures a rich and responsive user interface for enhanced user experience.
+
+5. **Unit Test Cases:**
+
+   - Includes comprehensive unit test cases to ensure functionality.
+
+6. **Package Type Color Coding:**
+   - Each package type is color-coded for easy identification.
+
+## How to Use:
+
+1. Clone the repository to your local machine.
+2. Install dependencies using `npm install` or `yarn install`.
+3. Run the application using `npm start` or `yarn start`.
+4. Access the application through the provided URL.
+
+## Folder Structure:
+
+```bash
+minizuba/
+│
+├── src/
+│ ├── app/
+│ │ ├── api-service/
+│ │ │ └── orderline-service.ts
+│ │ │
+│ │ ├── ordelines-listing/
+│ │ │ ├── ordelines-listing.component.html
+│ │ │ ├── ordelines-listing.component.scss
+│ │ │ ├── ordelines-listing.component.spec.ts
+│ │ │ └── ordelines-listing.component.ts
+│ │ ├── app.module.ts
+│ │ └── ...
+│ │
+│ ├── index.html
+│ ├── styles.scss
+│ └── ...
+│
+├── package.json
+└── README.md
+```
+
+## Dependencies:
+
+- Angular ^15.2.0
+- Angular Material UI ^15.2.9

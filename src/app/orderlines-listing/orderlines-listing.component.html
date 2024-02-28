@@ -1,0 +1,121 @@
+<div class="orderlinesMain">
+  <div style="padding-left: 8px">
+    Select Package Type and enter quantity (optional) to get data
+  </div>
+  <div class="selectType">
+    <mat-form-field width="150" appearance="outline">
+      <mat-label>Package Type</mat-label>
+      <mat-select
+        [(value)]="selectedType"
+        (selectionChange)="changeCheck($event)"
+      >
+        <mat-option
+          *ngFor="let type of packageTypes; index as index"
+          [value]="index"
+          ><div style="display: flex; align-items: center">
+            <!-- <div
+              class="colorCircle"
+              [style.background-color]="packageColors[index]"
+            ></div> -->
+            <div style="padding-left: 8px">{{ type }}</div>
+          </div>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Quanity</mat-label>
+      <input
+        type="number"
+        matInput
+        min="1"
+        step="1"
+        (keyup)="changeCheck($event)"
+        [(ngModel)]="quantity"
+      />
+    </mat-form-field>
+    <button
+      mat-flat-button
+      [disabled]="selectedType === null || !changeDetected"
+      color="primary"
+      (click)="getData()"
+    >
+      Apply
+    </button>
+    <button mat-stroked-button (click)="resetData()">Reset</button>
+  </div>
+  <div class="line"></div>
+  <div *ngIf="!showTable && errorLoadingData && !loadingTableData">
+    Error Loading Data. Please try again later
+  </div>
+  <div class="loaderDiv" *ngIf="showTable && loadingTableData">
+    <mat-progress-spinner class="loader" mode="indeterminate">
+    </mat-progress-spinner>
+  </div>
+  <div
+    [hidden]="!showTable || loadingTableData"
+    style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; padding-bottom: 4px"
+  >
+    <div class="tableSubject">
+      <div style="display: flex; align-items: center">
+        {{ tableHeadingString }}
+        <!-- Data for 'Package {{ packageTypes[selectedType] }}'
+        <div *ngIf="quantity">and 'Quanity of {{ quantity }}'</div> -->
+        <!-- <div
+          class="colorCircle"
+          style="margin: 0 8px"
+          [style.background-color]="packageColors[selectedType]"
+        ></div> -->
+      </div>
+      <button
+        mat-flat-button
+        [disabled]="selectedType === null"
+        color="primary"
+        (click)="resetFilters(); applyFilter()"
+      >
+        Reset Filters
+      </button>
+    </div>
+    <div id="style-1" style="width: 100%; overflow-x: auto">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container
+          *ngFor="let columnName of displayedColumns; index as index"
+          [matColumnDef]="columnName"
+        >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <div>
+              <div>{{ columnName }}</div>
+              <mat-form-field appearance="outline">
+                <input
+                  (click)="$event.stopPropagation()"
+                  (keyup)="applyFilter(); $event.stopPropagation()"
+                  matInput
+                  class="form-field"
+                  [(ngModel)]="filteredValuesObj[columnName]"
+                />
+              </mat-form-field>
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <div>{{ row[columnName] }}</div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell noDataClass" colspan="7">
+            No data matching for the selected patent type, quantity and(or)
+            filter(s)
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Select page"
+    ></mat-paginator>
+  </div>
+</div>
